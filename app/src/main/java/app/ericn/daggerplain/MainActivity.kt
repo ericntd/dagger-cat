@@ -1,30 +1,30 @@
 package app.ericn.daggerplain
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
     @Inject
-    lateinit var catRespository: CatRepository
+    lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as MyApp).component.inject(this)
+        val appComponent = (application as MyApp).component
+        val mainActivityComponent = appComponent
+            .mainActivityComponent(MainActivityComponent.MainActivityModule(this))
+        mainActivityComponent.inject(this)
 
         setContentView(R.layout.activity_main)
 
-        catRespository.getCat()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                println("got cat! ${it.url}")
-            }, {
-                Log.e("MainActivity", "problem getting cat", it)
-            })
+        presenter.attach()
+    }
+
+    override fun displayCat(imageUrl: String) {
+        val imageView = findViewById<ImageView>(R.id.image)
+        Glide.with(imageView).load("${BuildConfig.BASE_URL}$imageUrl").into(imageView)
     }
 }

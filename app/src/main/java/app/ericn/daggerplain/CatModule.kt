@@ -15,7 +15,7 @@ class CatModule {
     @Singleton
     fun retrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://cataas.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
