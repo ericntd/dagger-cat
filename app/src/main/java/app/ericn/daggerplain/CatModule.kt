@@ -1,6 +1,5 @@
 package app.ericn.daggerplain
 
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

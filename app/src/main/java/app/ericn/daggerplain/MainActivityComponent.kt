@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainActivityComponent.MainActivityModule::class])
+@PerActivity
 interface MainActivityComponent {
     fun inject(mainActivity: MainActivity)
 
@@ -12,6 +13,7 @@ interface MainActivityComponent {
     class MainActivityModule(private val mainActivity: MainActivity) {
 
         @Provides
+        @PerActivity
         fun presenter(catRepository: CatRepository): MainPresenter {
             return MainPresenter(catRepository, mainActivity)
         }
