@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         presenter.attach()
+
+        val fragment = ChildFragment.newInstance("one", "two")
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
     }
 
     override fun displayCat(imageUrl: String) {

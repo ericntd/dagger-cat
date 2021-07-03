@@ -9,6 +9,8 @@ import dagger.Subcomponent
 interface MainActivityComponent {
     fun inject(mainActivity: MainActivity)
 
+    fun fragmentComponent(module: ChildFragmentComponent.ChildFragmentModule): ChildFragmentComponent
+
     @Module
     class MainActivityModule(private val mainActivity: MainActivity) {
 
