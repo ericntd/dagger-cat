@@ -7,8 +7,10 @@ import dagger.Subcomponent
 @Subcomponent(modules = [MainActivityComponent.MainActivityModule::class])
 @PerActivity
 interface MainActivityComponent {
+    // injection targets
     fun inject(mainActivity: MainActivity)
 
+    // aka. plus
     fun fragmentComponent(module: ChildFragmentComponent.ChildFragmentModule): ChildFragmentComponent
 
     @Module
