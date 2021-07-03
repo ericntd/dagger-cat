@@ -22,6 +22,6 @@ class CatModule {
 
     @Provides
     @Singleton
-    fun catService(retrofit: Retrofit): CatApi =
+    fun catApi(retrofit: Retrofit): CatApi =
         retrofit.create(CatApi::class.java);
 }

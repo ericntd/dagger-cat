@@ -6,9 +6,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CatRepository @Inject constructor(private val service: CatService) {
+class CatRepository @Inject constructor(private val api: CatApi) {
     fun getCat(): Single<CatResponse> {
-        return service.getCat()
+        return api.getCat()
             .subscribeOn(Schedulers.io())
     }
 }

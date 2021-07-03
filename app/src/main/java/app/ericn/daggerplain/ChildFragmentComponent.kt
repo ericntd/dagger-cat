@@ -10,6 +10,6 @@ interface ChildFragmentComponent {
 
     @Module
     class ChildFragmentModule(childFragment: ChildFragment) {
-
+        // Dependencies that depend on ChildFragment e.g. StringProvider, Presenter
     }
 }

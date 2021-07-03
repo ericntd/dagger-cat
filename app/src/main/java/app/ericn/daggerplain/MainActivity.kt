@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         presenter.attach()
 
-        val fragment = ChildFragment.newInstance("one", "two")
+        val fragment = ChildFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
     }
 
