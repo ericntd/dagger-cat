@@ -8,14 +8,13 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @Module
 class CatModule {
     @Provides
     @Singleton
     fun retrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://cataas.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -23,6 +22,6 @@ class CatModule {
 
     @Provides
     @Singleton
-    fun catService(retrofit: Retrofit): CatApi =
-        retrofit.create(CatApi::class.java);
+    fun catApi(retrofit: Retrofit): CatApi =
+        retrofit.create(CatApi::class.java)
 }

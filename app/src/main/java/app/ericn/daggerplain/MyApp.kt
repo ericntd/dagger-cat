@@ -9,6 +9,7 @@ class MyApp : Application() {
         super.onCreate();
         component = DaggerMyAppComponent.builder()
             .contextModule(ContextModule(this))
+            .catModule(CatModule())
             .build();
     }
 }
