@@ -7,25 +7,23 @@ import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 import javax.inject.Singleton
 
-@Component(modules = [MainActivityComponent.MainActivityModule::class])
-//@Singleton
+@Component(modules = [MainActivityComponent.MainActivityModule::class], dependencies = [MyAppComponent::class])
 @PerActivity
 interface MainActivityComponent {
-//    fun catApi() : CatApi
-//    fun catService() : CatService
-//    fun catRepository() : CatRepository
+    // injection targets
+    fun inject(mainActivity: MainActivity)
 
-//    fun inject(mainActivity: MainActivity)
+    // Expose dependencies for downstream
+    fun catRepository() : CatRepository
 
-    @Module(subcomponents = [])
+    @Module()
     class MainActivityModule(private val mainActivity: MainActivity) {
 
-//        @Provides
-////        @PerActivity
-////        @Singleton
-//        fun presenter(catRepository: CatRepository): MainPresenter {
-//            return MainPresenter(catRepository, mainActivity)
-//        }
+        @Provides
+        @PerActivity
+        fun presenter(catRepository: CatRepository): MainPresenter {
+            return MainPresenter(catRepository, mainActivity)
+        }
     }
 }
 

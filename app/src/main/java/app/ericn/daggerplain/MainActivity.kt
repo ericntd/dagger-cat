@@ -14,11 +14,12 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
 
         val appComponent = (application as MyApp).component
-        appComponent.inject(this)
-//        val mainActivityModule = MainActivityComponent.MainActivityModule(this)
-//        val mainActivityComponent = appComponent
-//                .mainActivityComponent(mainActivityModule)
-//        mainActivityComponent.inject(this)
+        val mainActivityModule = MainActivityComponent.MainActivityModule(this)
+        val component = DaggerMainActivityComponent.builder()
+            .myAppComponent(appComponent)
+            .mainActivityModule(mainActivityModule)
+            .build()
+        component.inject(this)
 
         setContentView(R.layout.activity_main)
 

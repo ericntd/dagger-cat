@@ -16,8 +16,7 @@ interface MainView {
  *
  * @param view can't be provided automatically via constructor injection, check out [MainActivityComponent.MainActivityModule]
  */
-class MainPresenter @Inject constructor(private val repository: CatRepository) {
-//class MainPresenter(private val repository: CatRepository, private val view: MainView) {
+class MainPresenter(private val repository: CatRepository, private val view: MainView) {
 
     @SuppressLint("CheckResult")
     fun attach() {
@@ -25,7 +24,7 @@ class MainPresenter @Inject constructor(private val repository: CatRepository) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                            Log.i(TAG, "success! ${it.url}")
-//                    view.displayCat(it.url)
+                    view.displayCat(it.url)
                 }, {
                     Log.e(TAG, "error", it)
                 })
