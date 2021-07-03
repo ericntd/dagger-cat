@@ -3,18 +3,19 @@ package app.ericn.daggerplain
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
-import javax.inject.Singleton
 
-@Component(modules = [MainActivityComponent.MainActivityModule::class], dependencies = [MyAppComponent::class])
+@Component(
+    modules = [MainActivityComponent.MainActivityModule::class],
+    dependencies = [MyAppComponent::class]
+)
 @PerActivity
 interface MainActivityComponent {
     // injection targets
     fun inject(mainActivity: MainActivity)
 
     // Expose dependencies for downstream
-    fun catRepository() : CatRepository
+    fun catRepo(): CatRepository
 
     @Module()
     class MainActivityModule(private val mainActivity: MainActivity) {
