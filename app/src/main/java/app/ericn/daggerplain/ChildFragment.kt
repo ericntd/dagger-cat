@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -20,7 +19,7 @@ class ChildFragment : Fragment() {
         requireView().findViewById<TextView>(R.id.the_view)
     }
 
-    @Inject
+    @RequestDependency
     lateinit var catRepository: CatRepository
 
     override fun onCreateView(
@@ -35,11 +34,11 @@ class ChildFragment : Fragment() {
         super.onAttach(context)
 
         val activity = activity as MainActivity
-        val appComponent = (activity.application as MyApp).component
+        val appComponent = (activity.application as MyApp).injector
         val mainActivityComponent = appComponent
-            .mainActivityComponent(MainActivityComponent.MainActivityModule(activity))
-        val fragmentComponent = mainActivityComponent.fragmentComponent(ChildFragmentComponent.ChildFragmentModule(this))
-        fragmentComponent.inject(this)
+            .plusMainActivityInjector(MainActivityInjector.MainActivityDependencyHolder(activity))
+        val fragmentComponent = mainActivityComponent.plusFragmentInjector(ChildFragmentInjector.ChildFragmentDependencyHolder(this))
+        fragmentComponent.injectInto(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

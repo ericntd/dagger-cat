@@ -3,12 +3,12 @@ package app.ericn.daggerplain
 import android.app.Application
 
 class MyApp : Application() {
-    lateinit var component: MyAppComponent;
+    lateinit var injector: MyAppInjector;
 
     override fun onCreate() {
         super.onCreate();
-        component = DaggerMyAppComponent.builder()
-            .contextModule(ContextModule(this))
+        injector = DaggerMyAppInjector.builder()
+            .contextDependencyHolder(ContextDependencyHolder(this))
             .build();
     }
 }

@@ -1,17 +1,14 @@
 package app.ericn.daggerplain
 
-import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-
-@Module
-class CatModule {
+@DependencyHolder
+class CatDependencyHolder {
     @Provides
-    @Singleton
+    @AppScope
     fun retrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
@@ -21,7 +18,7 @@ class CatModule {
     }
 
     @Provides
-    @Singleton
+    @AppScope
     fun catApi(retrofit: Retrofit): CatApi =
         retrofit.create(CatApi::class.java);
 }

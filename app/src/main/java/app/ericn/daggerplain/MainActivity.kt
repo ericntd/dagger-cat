@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
-    @Inject
+    @RequestDependency
     lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val appComponent = (application as MyApp).component
+        val appComponent = (application as MyApp).injector
         val mainActivityComponent = appComponent
-            .mainActivityComponent(MainActivityComponent.MainActivityModule(this))
-        mainActivityComponent.inject(this)
+            .plusMainActivityInjector(MainActivityInjector.MainActivityDependencyHolder(this))
+        mainActivityComponent.injectInto(this)
 
         setContentView(R.layout.activity_main)
 

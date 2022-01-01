@@ -10,10 +10,10 @@ interface MainView {
 
 /**
  * Dagger can't automatically figure out [MainView] dependency
- * Hence this is provided in [MainActivityComponent.MainActivityModule]
+ * Hence this is provided in [MainActivityInjector.MainActivityDependencyHolder]
  * instead of constructor <code>@Inject</code>
  *
- * @param view can't be provided automatically via constructor injection, check out [MainActivityComponent.MainActivityModule]
+ * @param view can't be provided automatically via constructor injection, check out [MainActivityInjector.MainActivityDependencyHolder]
  */
 class MainPresenter(private val repository: CatRepository, private val view: MainView) {
     @SuppressLint("CheckResult")
