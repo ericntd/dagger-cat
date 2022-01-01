@@ -5,15 +5,21 @@ import dagger.Subcomponent
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class DaggerAliases {
-}
-
 typealias AppScope = Singleton
+/**
+ * For automatic service discovery or provision outside of [DependencyHolder]/ Module
+ */
 typealias Contribute = Inject
+/**
+ * Alternatively "DependencyGroup" or "CompositionRoot"
+ */
 typealias DependencyHolder = Module
 typealias Injector = Component
+/**
+ * Alternatively "InjectorPart"
+ */
 typealias SubInjector = Subcomponent
 /**
- * This is optional, as long [Contribute] and "injectInto" methods are clear, this won't be needed
+ * This is not very critical as long as [Contribute] and "injectInto" methods are clear
  */
 typealias RequestDependency = Inject
