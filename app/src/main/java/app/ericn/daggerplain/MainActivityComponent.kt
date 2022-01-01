@@ -11,7 +11,7 @@ interface MainActivityComponent {
     fun inject(mainActivity: MainActivity)
 
     // aka. plus
-    fun fragmentComponent(module: ChildFragmentComponent.ChildFragmentModule): ChildFragmentComponent
+    fun fragmentComponent(childFragmentModule: ChildFragmentComponent.ChildFragmentModule): ChildFragmentComponent
 
     @Module
     class MainActivityModule(private val mainActivity: MainActivity) {
