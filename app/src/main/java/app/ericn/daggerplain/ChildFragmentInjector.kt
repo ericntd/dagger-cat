@@ -2,8 +2,10 @@ package app.ericn.daggerplain
 
 @SubInjector(modules = [ChildFragmentInjector.ChildFragmentDependencyHolder::class])
 interface ChildFragmentInjector {
-    // injection targets
-    fun injectInto(fragment: ChildFragment)
+    /**
+     * The entry points can then dependency using @RequestDependency or @Inject
+     */
+    fun registerAndroidEntryPoint(fragment: ChildFragment)
 
     @DependencyHolder
     class ChildFragmentDependencyHolder(childFragment: ChildFragment) {

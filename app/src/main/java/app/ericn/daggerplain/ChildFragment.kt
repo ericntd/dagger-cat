@@ -36,9 +36,9 @@ class ChildFragment : Fragment() {
         val activity = activity as MainActivity
         val appComponent = (activity.application as MyApp).injector
         val mainActivityComponent = appComponent
-            .plusMainActivityInjector(MainActivityInjector.MainActivityDependencyHolder(activity))
-        val fragmentComponent = mainActivityComponent.plusFragmentInjector(ChildFragmentInjector.ChildFragmentDependencyHolder(this))
-        fragmentComponent.injectInto(this)
+            .plus(MainActivityInjector.MainActivityDependencyHolder(activity))
+        val fragmentComponent = mainActivityComponent.plus(ChildFragmentInjector.ChildFragmentDependencyHolder(this))
+        fragmentComponent.registerAndroidEntryPoint(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class ChildFragment : Fragment() {
         catRepository.getCat()
             .subscribe( {
                 Log.d(TAG, "success ${it.url}")
-//                textView.text = it.id
+                textView.text = it.id
             }, {
                 Log.e(TAG, "failure", it)
             })

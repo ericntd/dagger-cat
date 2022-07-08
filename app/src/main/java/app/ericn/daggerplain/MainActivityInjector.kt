@@ -5,11 +5,15 @@ import dagger.Provides
 @SubInjector(modules = [MainActivityInjector.MainActivityDependencyHolder::class])
 @PerActivity
 interface MainActivityInjector {
-    // injection targets
-    fun injectInto(mainActivity: MainActivity)
+    /**
+     * The entry points can then dependency using @RequestDependency or @Inject
+     */
+    fun registerAndroidEntryPoint(mainActivity: MainActivity)
 
-    // aka. plus
-    fun plusFragmentInjector(childFragmentDependencyHolder: ChildFragmentInjector.ChildFragmentDependencyHolder): ChildFragmentInjector
+    /**
+     * Incorporate the dependencies in [ChildFragmentInjector.ChildFragmentDependencyHolder] into the larger dependency graph of MainActivity
+     */
+    fun plus(childFragmentDependencyHolder: ChildFragmentInjector.ChildFragmentDependencyHolder): ChildFragmentInjector
 
     @DependencyHolder
     class MainActivityDependencyHolder(private val mainActivity: MainActivity) {

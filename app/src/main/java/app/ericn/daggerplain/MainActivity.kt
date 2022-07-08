@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val appComponent = (application as MyApp).injector
         val mainActivityComponent = appComponent
-            .plusMainActivityInjector(MainActivityInjector.MainActivityDependencyHolder(this))
-        mainActivityComponent.injectInto(this)
+            .plus(MainActivityInjector.MainActivityDependencyHolder(this))
+        mainActivityComponent.registerAndroidEntryPoint(this)
 
         setContentView(R.layout.activity_main)
 
