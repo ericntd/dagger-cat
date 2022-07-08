@@ -55,7 +55,7 @@ class ChildFragment : Fragment() {
         val component = DaggerChildFragmentComponent.builder()
             .mainActivityComponent(mainActivityComponent)
             .build()
-        component.inject(this)
+        component.registerAndroidEntryPoint(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

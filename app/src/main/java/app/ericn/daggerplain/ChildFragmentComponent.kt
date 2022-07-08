@@ -7,8 +7,10 @@ import javax.inject.Scope
 @Component(modules = [ChildFragmentComponent.ChildFragmentModule::class], dependencies = [MainActivityComponent::class])
 @PerFragment
 interface ChildFragmentComponent {
-    // injection targets
-    fun inject(childFragment: ChildFragment)
+    /**
+     * Allow [ChildFragment] can then request dependency from the graph using @Inject
+     */
+    fun registerAndroidEntryPoint(childFragment: ChildFragment)
 
     @Module
     class ChildFragmentModule {

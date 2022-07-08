@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), MainView {
             .myAppComponent(appComponent)
             .mainActivityModule(mainActivityModule)
             .build()
-        component.inject(this)
+        component.registerAndroidEntryPoint(this)
 
         setContentView(R.layout.activity_main)
 

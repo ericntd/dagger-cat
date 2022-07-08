@@ -11,11 +11,12 @@ import javax.inject.Scope
 )
 @PerActivity
 interface MainActivityComponent {
-    // injection targets
-    fun inject(mainActivity: MainActivity)
+    /**
+     * Allow [MainActivity] can then request dependency from the graph using @Inject
+     */
+    fun registerAndroidEntryPoint(mainActivity: MainActivity)
 
-    // Expose dependencies for downstream
-    fun catRepo(): CatRepository
+    fun expoCatRepo(): CatRepository
 
     @Module()
     class MainActivityModule(private val mainActivity: MainActivity) {
